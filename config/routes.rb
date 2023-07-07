@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :comments
   resources :near_by_places
   resources :houses
   resources :places

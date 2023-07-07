@@ -10,4 +10,4 @@ class CreateLocations < ActiveRecord::Migration[7.0]
     end
   end
 end
-Rails g scaffold nearByPlace name distance:decimal user:references house:references
+Rails g scaffold comment description user:references house:references
