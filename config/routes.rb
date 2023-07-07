@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :near_by_places
+  resources :houses
   resources :places
   resources :locations
   resources :securities
