@@ -46,6 +46,6 @@ class NearByPlacesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def near_by_place_params
-      params.require(:near_by_place).permit(:name, :distance, :user_id, :house_id)
+      params.require(:near_by_place).permit(:name, :distance, :place_id, :house_id)
     end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_07_224403) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_09_222250) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -61,12 +61,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_07_224403) do
   create_table "near_by_places", force: :cascade do |t|
     t.string "name"
     t.decimal "distance"
-    t.bigint "user_id", null: false
+    t.bigint "place_id", null: false
     t.bigint "house_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["house_id"], name: "index_near_by_places_on_house_id"
-    t.index ["user_id"], name: "index_near_by_places_on_user_id"
+    t.index ["place_id"], name: "index_near_by_places_on_place_id"
   end
 
   create_table "places", force: :cascade do |t|
@@ -99,5 +99,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_07_224403) do
   add_foreign_key "houses", "securities"
   add_foreign_key "houses", "users"
   add_foreign_key "near_by_places", "houses"
-  add_foreign_key "near_by_places", "users"
+  add_foreign_key "near_by_places", "places"
 end

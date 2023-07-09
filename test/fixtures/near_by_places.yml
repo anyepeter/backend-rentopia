@@ -3,11 +3,11 @@
 one:
   name: MyString
   distance: 9.99
-  user: one
+  place: one
   house: one
 
 two:
   name: MyString
   distance: 9.99
-  user: two
+  place: two
   house: two
