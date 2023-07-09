@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  gate: false
+  securityMan: false
+
+two:
+  gate: false
+  securityMan: false

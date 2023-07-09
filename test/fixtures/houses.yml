@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  number_of_houses: 1
+  price: 9.99
+  metal_type: MyString
+  water_source: MyString
+  funitures: false
+  user: one
+  category: one
+  security: one
+  location: one
+
+two:
+  title: MyString
+  number_of_houses: 1
+  price: 9.99
+  metal_type: MyString
+  water_source: MyString
+  funitures: false
+  user: two
+  category: two
+  security: two
+  location: two
