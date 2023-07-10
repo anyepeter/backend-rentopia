@@ -3,9 +3,22 @@ class HousesController < ApplicationController
 
   # GET /houses
   def index
-    @houses = House.all
-
-    render json: @houses
+    @houses = House.includes(:user, :category, :location, :security, :near_by_places).all
+    if @houses
+    @houses = @houses.map do |house| 
+      {
+        user_info: house.user.attributes,
+        category_info: house.category.attributes,
+        house_info: house.attributes,
+        location_info: house.location.attributes,
+        security_info: house.security.attributes,
+        places_info: house.near_by_places.map(&:attributes)
+      }
+    end
+    render json: @houses, status: :ok
+  else
+    render json: @houses.errors.full_messages
+  end
   end
 
   # GET /houses/1
@@ -46,11 +59,10 @@ class HousesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def house_params
-      params.require(:house).permit(:title, :number_of_houses, :price, :metal_type, :water_source, :funitures, :user_id, :category_id, 
-      locations: [
-        :city, :quater, :longitude, :latitude
-    ], 
-     security: [:gate, :securityMan]
+      params.permit(:title, :number_of_houses, :price, :metal_type, :water_source, :funitures, :user_id, :category_id, 
+      location_attributes: [:city, :quater, :longitude, :latitude], 
+     security_attributes: [:gate, :securityMan],
+     near_by_places_attributes: [:name, :distance, place_attributes: [:name]]
       )
     end
 end
