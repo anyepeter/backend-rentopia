@@ -3,24 +3,9 @@ class HousesController < ApplicationController
 
   # GET /houses
   def index
-    @houses = House.includes(:user, :category, :location, :security, :near_by_places).with_attached_images.all
-    if @houses
-      @houses = @houses.map do |house| 
-        {
-          user_info: house.user.attributes,
-          category_info: house.category.attributes,
-          house_info: house.attributes.merge(video: house.video.attached? ? url_for(house.video) : nil),
-          location_info: house.location.attributes,
-          security_info: house.security.attributes,
-          places_info: house.near_by_places.map(&:attributes),
-          images: house.images.attached? ? house.images.map { |image| url_for(image) } : []
-        }
-      end
-      
-    render json: @houses, status: :ok
-  else
-    render json: @houses.errors.full_messages
-  end
+    @houses = House.includes(:user, :category, :location, :security, :near_by_places).all
+    
+    render json: @houses, include: :user, status: :ok
   end
 
   # GET /houses/1
@@ -33,7 +18,7 @@ class HousesController < ApplicationController
     @house = House.new(house_params)
 
     if @house.save
-      render json: @house, status: :created, location: @house
+      render json: @house, status: :created, include: ["user"], location: @house
     else
       render json: @house.errors, status: :unprocessable_entity
     end

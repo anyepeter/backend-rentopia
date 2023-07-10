@@ -1,6 +1,12 @@
 class HouseSerializer < ActiveModel::Serializer
     include Rails.application.routes.url_helpers
-    attributes(*House.attribute_names.map(&:to_sym).merge(video: house.video.attached? ? url_for(house.video) : nil) )   
+    attributes(*House.attribute_names.map(&:to_sym), :video, :images ) 
+    
+    belongs_to :user
+    belongs_to :category
+    belongs_to :security
+    belongs_to :location
+    has_many :near_by_places
       
     def video
       if object.video.blob.present?
