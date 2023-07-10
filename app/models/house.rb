@@ -8,4 +8,7 @@ class House < ApplicationRecord
   accepts_nested_attributes_for :location
   accepts_nested_attributes_for :security
   accepts_nested_attributes_for :near_by_places
+  
+  has_one_attached :video
+  has_many_attached :images
 end
