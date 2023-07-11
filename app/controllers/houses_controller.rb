@@ -1,6 +1,6 @@
 class HousesController < ApplicationController
   before_action :set_house, only: %i[ show update destroy ]
-
+  before_action :authorize_request, except: :index
   # GET /houses
   def index
     @houses = House.includes(:user, :category, :location, :security, :near_by_places).all
@@ -10,12 +10,14 @@ class HousesController < ApplicationController
 
   # GET /houses/1
   def show
-    render json: @house
+    puts current_user
+    render json: @house, include: :user
   end
 
   # POST /houses
   def create
-    @house = House.new(house_params)
+  
+    @house = current_user.houses.build(house_params)
 
     if @house.save
       render json: @house, status: :created, include: ["user"], location: @house
@@ -46,7 +48,7 @@ class HousesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def house_params
-      params.permit(:title, :number_of_houses, :price, :metal_type, :water_source, :funitures, :user_id, :category_id, :video, images: [],
+      params.permit(:title, :number_of_houses, :price, :metal_type, :water_source, :funitures, :category_id, :video, images: [],
       location_attributes: [:city, :quater, :longitude, :latitude], 
      security_attributes: [:gate, :securityMan],
      near_by_places_attributes: [:name, :distance, place_attributes: [:name]]
