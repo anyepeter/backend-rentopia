@@ -3,9 +3,9 @@ class HousesController < ApplicationController
 
   # GET /houses
   def index
-    @houses = House.all
-
-    render json: @houses
+    @houses = House.includes(:user, :category, :location, :security, :near_by_places).all
+    
+    render json: @houses, include: :user, status: :ok
   end
 
   # GET /houses/1
@@ -18,7 +18,7 @@ class HousesController < ApplicationController
     @house = House.new(house_params)
 
     if @house.save
-      render json: @house, status: :created, location: @house
+      render json: @house, status: :created, include: ["user"], location: @house
     else
       render json: @house.errors, status: :unprocessable_entity
     end
@@ -46,6 +46,10 @@ class HousesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def house_params
-      params.require(:house).permit(:title, :number_of_houses, :price, :metal_type, :water_source, :funitures, :user_id, :category_id, :security_id, :location_id)
+      params.permit(:title, :number_of_houses, :price, :metal_type, :water_source, :funitures, :user_id, :category_id, :video, images: [],
+      location_attributes: [:city, :quater, :longitude, :latitude], 
+     security_attributes: [:gate, :securityMan],
+     near_by_places_attributes: [:name, :distance, place_attributes: [:name]]
+      )
     end
 end

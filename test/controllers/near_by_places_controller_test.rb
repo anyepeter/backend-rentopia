@@ -12,7 +12,7 @@ class NearByPlacesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create near_by_place" do
     assert_difference("NearByPlace.count") do
-      post near_by_places_url, params: { near_by_place: { distance: @near_by_place.distance, house_id: @near_by_place.house_id, name: @near_by_place.name, user_id: @near_by_place.user_id } }, as: :json
+      post near_by_places_url, params: { near_by_place: { distance: @near_by_place.distance, house_id: @near_by_place.house_id, name: @near_by_place.name, place_id: @near_by_place.place_id } }, as: :json
     end
 
     assert_response :created
@@ -24,7 +24,7 @@ class NearByPlacesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update near_by_place" do
-    patch near_by_place_url(@near_by_place), params: { near_by_place: { distance: @near_by_place.distance, house_id: @near_by_place.house_id, name: @near_by_place.name, user_id: @near_by_place.user_id } }, as: :json
+    patch near_by_place_url(@near_by_place), params: { near_by_place: { distance: @near_by_place.distance, house_id: @near_by_place.house_id, name: @near_by_place.name, place_id: @near_by_place.place_id } }, as: :json
     assert_response :success
   end
 
