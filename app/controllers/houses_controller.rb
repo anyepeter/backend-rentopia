@@ -51,7 +51,7 @@ class HousesController < ApplicationController
       params.permit(:title, :number_of_houses, :price, :metal_type, :water_source, :funitures, :category_id, :video, images: [],
       location_attributes: [:city, :quater, :longitude, :latitude], 
      security_attributes: [:gate, :securityMan],
-     near_by_places_attributes: [:name, :distance, place_attributes: [:name]]
+     near_by_places_attributes: [:name, :distance, :place_id]
       )
     end
 end

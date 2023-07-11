@@ -13,6 +13,10 @@ gem 'jwt'
 
 gem 'active_model_serializers'
 
+#active storage validation
+
+gem 'active_storage_validations'
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
