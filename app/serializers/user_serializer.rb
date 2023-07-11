@@ -1,6 +1,6 @@
 class UserSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes(*User.attribute_names.map(&:to_sym), :avatar)   
+  attributes :id, :name, :email, :password, :occupation, :phone_number, :avatar
 
   
   def avatar
