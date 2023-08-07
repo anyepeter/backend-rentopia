@@ -1,4 +1,5 @@
 class AuthenticateController < ApplicationController
+    before_action :authorize_request, except: :login
     def login 
         @user = User.find_by(login_required)
         if @user

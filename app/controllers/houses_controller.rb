@@ -48,7 +48,7 @@ class HousesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def house_params
-      params.permit(:title, :number_of_houses, :price, :metal_type, :water_source, :funitures, :category_id, :video, images: [],
+      params.permit(:title, :number_of_houses, :price, :metal_type, :water_source, :garage, :category_id, :description, :bathroom, :bedroom, :video, images: [],
       location_attributes: [:city, :quater, :longitude, :latitude], 
      security_attributes: [:gate, :securityMan],
      near_by_places_attributes: [:name, :distance, :place_id]
